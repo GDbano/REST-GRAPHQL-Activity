@@ -26,6 +26,7 @@ let students = [
     year: 3
   }
 ];
+let nextId = students.length + 1;
 
 app.get("/api/students", (req, res) => {
   res.json(students);
