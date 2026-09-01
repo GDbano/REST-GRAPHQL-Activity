@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
-const { buildSchema, graphql } = require("graphql");
+const { buildSchema } = require("graphql");
+const { createHandler } = require("graphql-http");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -167,8 +168,14 @@ const rootValue = {
   student: ({ id }) => students.find((s) => s.id === id),
 };
 
-
-
+app.use(
+  "/graphql",
+  createHandler({
+    schema,
+    rootValue,
+    graphiql: true,
+  })
+);
 
 app.listen(PORT, () => {
   console.log(`Student portal demo running on http://localhost:${PORT}`);
