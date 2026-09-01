@@ -32,7 +32,7 @@ app.get("/api/students", (req, res) => {
 });
 
 app.get("/api/students/:id", (req, res) => {
-  const student = students.find((s) => s.id === parseInt(req.params.id));
+  const student = students.find((s) => s.id === req.params.id);
   if (!student) {
     return res.status(404).json({ error: "Student not found" });
   }
